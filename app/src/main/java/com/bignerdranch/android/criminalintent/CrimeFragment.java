@@ -1,11 +1,11 @@
 package com.bignerdranch.android.criminalintent;
 
 
-import android.text.format.DateFormat;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +54,8 @@ public class CrimeFragment extends Fragment {
         });
 
         mDateButton = (Button)v.findViewById(R.id.crime_date);
-        String myString = DateFormat.getMediumDateFormat(this.getContext()).format(mCrime.getDate());
+        String formatString = "EEEE, MMM dd, yyyy";
+        String myString = (String) DateFormat.format(formatString,mCrime.getDate());
         mDateButton.setText(myString);
         mDateButton.setEnabled(false);
 
