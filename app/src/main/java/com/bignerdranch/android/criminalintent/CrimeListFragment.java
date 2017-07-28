@@ -20,6 +20,7 @@ import java.util.List;
 public class CrimeListFragment extends Fragment {
 
     private RecyclerView mCrimeRecyclerView;
+    private CrimeAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,12 +35,23 @@ public class CrimeListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
 
-        CrimeAdapter mAdapter = new CrimeAdapter(crimes);
-        mCrimeRecyclerView.setAdapter(mAdapter);
+        if (mAdapter == null) {
+            mAdapter = new CrimeAdapter(crimes);
+            mCrimeRecyclerView.setAdapter(mAdapter);
+        } else {
+            mAdapter.notifyDataSetChanged();
+        }
+
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder
@@ -48,7 +60,6 @@ public class CrimeListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckBox mSolvedCheckBox;
-        private CrimeAdapter mAdapter;
         private Crime mCrime;
 
         public CrimeHolder(View itemView) {

@@ -1,0 +1,6 @@
+7/28/2017, 5:02:31 PM
+Working on chapter 10 challenge:
+modify code so that only the modified crime is refreshed in the crimes list.
+
+Think I need to set a bundle in the fragment to pass back the ID of the crime.
+Once we have that ID, we can update that one textView
